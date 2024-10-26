@@ -4,12 +4,14 @@ import { generateObject } from 'ai';
 import { z } from 'zod';
 import client from "@/lib/mongodb";
 
+const TAGS = ["Nábytok","Deti","Chovateľské potreby","Záhrada","Textil","Knihy, CD, DVD a pod."]
+
 const model = openai('gpt-4o-2024-08-06');
 
 const schema = z.object({
     title: z.string(),
     description: z.string(),
-    tags: z.array(z.enum(["doprava","zdravie","neporiadok","odvod_odpadu"])),
+    tags: z.array(z.enum(TAGS)),
 });
 
 async function addToDB(imageData:string,message:object){
@@ -42,7 +44,7 @@ export async function POST(req: NextRequest) {
                 {
                     role: 'user',
                     content: [
-                        { type: 'text', text: 'This image is a report of a problem in town summarize it in title of the problem (around 10 words max) and description of the problem (around 50 words max) and add tags, answer in slovak,do NOT change language to czech' },
+                        { type: 'text', text: "This is an image of an item submited to a reuse center. Assign tags to it:" },
                         { type: 'image', image: data }
                     ],
                 },

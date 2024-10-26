@@ -4,6 +4,7 @@ import React, { useRef, useCallback, useEffect, useState } from 'react';
 import Webcam from 'react-webcam';
 import { v4 as uuidV4 } from 'uuid';
 import Header from '../components/Header';
+import PostToDB from './postToDb';
 
 interface FormFill {
   title: string;
@@ -56,7 +57,7 @@ export default function Camera({ onFinishedProcessing }: Props) {
           tags: data.tags,
           uuid: imageUUID,
         };
-
+        await PostToDB(base)
         onFinishedProcessing(imageUUID);
         console.log(base);
       } catch (error) {
