@@ -54,4 +54,4 @@ export async function POST(req: NextRequest) {
         console.log(error);
         return NextResponse.json({ message: "Failed to read image" }, { status: 500 });
     }
-}
+}//sigma
