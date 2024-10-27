@@ -139,3 +139,4 @@ export default function Camera({ onFinishedProcessing }: Props) {
     </div>
   );
 }
+//sigma
