@@ -1,13 +1,12 @@
 // pages/camera.js
 "use client";
-import React, { useRef, useCallback, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Webcam from "react-webcam";
 import { v4 as uuidV4 } from "uuid";
 import PostToDB from "./postToDb";
 import { MdOutlinePhotoCamera } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 import { FaRepeat } from "react-icons/fa6";
-import { useRouter } from "next/navigation";
 
 interface FormFill {
   title: string;
@@ -33,12 +32,10 @@ interface Props {
 export default function Camera({ onFinishedProcessing }: Props) {
   const webcamRef = useRef<Webcam>(null);
   const [hasWebcamAccess, setHasWebcamAccess] = useState(false);
-  const [buttonText, setButtonText] = useState("Odfotiť");
   const [isProcessing, setIsProcessing] = useState(false);
-  const router = useRouter();
+  const [id, setId] = useState("");
 
-  const capture = useCallback(async () => {
-    setButtonText("Spracuvávam...");
+  const capture = async () => {
     setIsProcessing(true);
     if (webcamRef.current) {
       const imageSrc = webcamRef.current.getScreenshot();
@@ -63,16 +60,12 @@ export default function Camera({ onFinishedProcessing }: Props) {
           uuid: imageUUID,
         };
         await PostToDB(base);
-        onFinishedProcessing(imageUUID);
-        console.log(base);
+        setId(imageUUID);
       } catch (error) {
         console.error("Error processing image:", error);
-      } finally {
-        setButtonText("Odfotiť");
-        setIsProcessing(false);
       }
     }
-  }, [onFinishedProcessing]);
+  };
 
   useEffect(() => {
     const checkWebcamAccess = async () => {
@@ -86,7 +79,7 @@ export default function Camera({ onFinishedProcessing }: Props) {
     };
 
     checkWebcamAccess();
-  }, []); // Ensuring useEffect runs only once
+  }, []);
 
   return (
     <div className="p-2 rounded-xl bg-yellow-600 shadow-lg w-full max-w-[100%] flex flex-col items-center">
@@ -99,19 +92,15 @@ export default function Camera({ onFinishedProcessing }: Props) {
             videoConstraints={videoConstraints}
             className="rounded-xl border-4 border-white shadow-md mb-4 w-full aspect-square"
           />
-          <button
+          {!isProcessing && <button
             onClick={capture}
             disabled={isProcessing}
-            className={`flex flex-row items-center gap-1 mb-2 rounded-xl ${
-              isProcessing
-                ? "bg-blue-600 text-white"
-                : "bg-white hover:bg-yellow-600"
-            } font-bold py-2 px-4 shadow-md transition duration-300`}
+            className={`flex flex-row items-center gap-1 mb-2 rounded-xl bg-white hover:bg-yellow-600 font-bold py-2 px-4 shadow-md transition duration-300`}
           >
             <MdOutlinePhotoCamera className="text-xl" />
-            {buttonText}
-          </button>
-          {isProcessing && (<div className="flex flex-row gap-2 text-sm font-bold text-white w-full">
+            Odfotiť
+          </button>}
+          {isProcessing && (<div className="flex flex-row gap-2 text-sm font-bold text-black w-full">
             <input
               type="text"
               placeholder="Kód na pokladni..."
@@ -119,17 +108,13 @@ export default function Camera({ onFinishedProcessing }: Props) {
             />
             <button
               className="bg-blue-600 text-white py-2 p-3 rounded-lg shadow-lg flex flex-row gap-1 items-center justify-center"
-              onClick={() => {
-                router.push("/");
-              }}
+              onClick={() => setIsProcessing(false)}
             >
               <FaRepeat className="text-base" />
             </button>
             <button
               className="bg-green-600 text-white py-2 pr-3 pl-4 rounded-lg shadow-lg flex flex-row gap-1 items-center justify-center"
-              onClick={() => {
-                router.push("/");
-              }}
+              onClick={() => onFinishedProcessing(id)}
             >
               Potvrdiť
               <IoSend className="text-base" />
