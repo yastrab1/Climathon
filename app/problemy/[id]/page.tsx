@@ -42,7 +42,7 @@ export default function Home() {
             <textarea
               placeholder="Popis..."
               className="w-full border border-gray-300 rounded-md p-2 h-28"
-              defaultValue={components && components.components[1].props.data}
+              defaultValue={components && components.tags}
             ></textarea>
           </div>
         </div>
