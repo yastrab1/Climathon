@@ -14,13 +14,13 @@ const Header = () => {
         <nav className="h-full">
           <ul className="flex space-x-6 font-semibold font-sans items-center h-full px-4">
             <li>
-              <Link href="/">Home</Link>
+              <Link href="/">Domov</Link>
             </li>
             <li>
-              <Link href="/about">About</Link>
+              <Link href="/about">O nás</Link>
             </li>
             <li>
-              <Link href="/contact">Contact</Link>
+              <Link href="/contact">Kontakt</Link>
             </li>
           </ul>
         </nav>
