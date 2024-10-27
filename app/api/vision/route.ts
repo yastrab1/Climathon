@@ -4,14 +4,12 @@ import { generateObject } from 'ai';
 import { z } from 'zod';
 import client from "@/lib/mongodb";
 
-const TAGS = ["Nábytok","Deti","Chovateľské potreby","Záhrada","Textil","Knihy, CD, DVD a pod."]
-
 const model = openai('gpt-4o-2024-08-06');
 
 const schema = z.object({
     title: z.string(),
     description: z.string(),
-    tags: z.array(z.enum(TAGS)),
+    tags: z.array(z.enum(["Nábytok","Deti","Chovateľské potreby","Záhrada","Textil","Knihy, CD, DVD a pod.", "Porcelán", "Malé", "Šálka"])),
 });
 
 async function addToDB(imageData:string,message:object){
@@ -24,7 +22,7 @@ async function addToDB(imageData:string,message:object){
         } );
         console.log(result)
     }catch(err){
-
+        console.log(err)
     }
 }
 
@@ -51,10 +49,9 @@ export async function POST(req: NextRequest) {
             ],
         });
         await addToDB(data, object)
-        console.log(object)
         return NextResponse.json({ message: object }, { status: 200 });
     } catch (error) {
         console.log(error);
         return NextResponse.json({ message: "Failed to read image" }, { status: 500 });
     }
-}
+}//sigma

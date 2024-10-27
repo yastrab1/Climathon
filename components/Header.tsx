@@ -6,7 +6,7 @@ import Image from "next/image";
 const Header = () => {
   return (
     <>
-    <header className="fixed text-white shadow-md w-full h-16 bg-yellow-500">
+    <header className="fixed text-white shadow-md w-full h-16 bg-yellow-500 z-10">
       <div className="absolute top-0 flex flex-row w-full h-16 border-b-4 border-yellow-600 px-4 shadow-xl">
         <div className="flex flex-grow items-center space-x-2">
           <Image src="/Kolo.png" width={99} height={32} alt="Logo"/>
@@ -14,6 +14,7 @@ const Header = () => {
         <nav className="h-full">
           <ul className="flex space-x-6 font-semibold font-sans items-center h-full px-4">
             <li>
+<<<<<<< HEAD
               <Link href="../catalog">Home</Link>
             </li>
             <li>
@@ -21,6 +22,15 @@ const Header = () => {
             </li>
             <li>
               <Link href="../checking">Problems</Link>
+=======
+              <Link href="../catalog">Domov</Link>
+            </li>
+            <li>
+              <Link href="../camera">Pridať</Link>
+            </li>
+            <li>
+              <Link href="../checking">Schvaľovanie</Link>
+>>>>>>> 9519a92a52b89eef36c127f513b3e50131cf5013
             </li>
           </ul>
         </nav>
@@ -30,4 +40,4 @@ const Header = () => {
     
   );
 };
-export default dynamic(() => Promise.resolve(Header), { ssr: false });
+export default dynamic(() => Promise.resolve(Header), { ssr: false });
