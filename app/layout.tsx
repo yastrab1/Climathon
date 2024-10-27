@@ -32,7 +32,7 @@ export default function RootLayout({
         <Header/>
         <div className="h-16"></div>
         {children}
-        <footer className="w-full mt-8 p-4 bg-primaryYellow text-white text-center font-semibold">
+        <footer className="w-full p-4 bg-yellow-500 text-white text-center font-semibold">
         © 2024 KOLO. All Rights Reserved.
       </footer>
       </body>

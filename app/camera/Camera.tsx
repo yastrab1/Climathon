@@ -5,6 +5,7 @@ import Webcam from 'react-webcam';
 import { v4 as uuidV4 } from 'uuid';
 import Header from '../components/Header';
 import PostToDB from './postToDb';
+import { MdHeight } from 'react-icons/md';
 
 interface FormFill {
   title: string;
@@ -14,6 +15,7 @@ interface FormFill {
 
 const videoConstraints = {
   facingMode: 'environment',
+  aspectRatio: 1,
 };
 
 interface Components {
@@ -84,9 +86,9 @@ export default function Camera({ onFinishedProcessing }: Props) {
   }, []); // Ensuring useEffect runs only once
 
   return (
-    <div className="flex flex-col items-center justify-center py-[40%] bg-primaryGray text-gray-800">
+    <div className="flex flex-col items-center justify-center p-4 text-gray-800">
       {/* <Header /> */}
-      <div className="mt-8 p-4 rounded-xl bg-white shadow-lg w-full max-w-[100%] flex flex-col items-center">
+      <div className="p-2 rounded-xl bg-yellow-600 shadow-lg w-full max-w-[100%] flex flex-col items-center">
         {hasWebcamAccess ? (
           <>
             <Webcam
@@ -94,7 +96,7 @@ export default function Camera({ onFinishedProcessing }: Props) {
               ref={webcamRef}
               screenshotFormat="image/jpeg"
               videoConstraints={videoConstraints}
-              className="rounded-xl border-4 border-primaryYellow shadow-md mb-4 w-full"
+              className="rounded-xl border-4 border-white shadow-md mb-4 w-full aspect-square"
             />
             <button
               onClick={capture}

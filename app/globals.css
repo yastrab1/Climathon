@@ -20,6 +20,6 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  @apply bg-yellow-500;
   font-family: Arial, Helvetica, sans-serif;
 }
