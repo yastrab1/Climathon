@@ -4,14 +4,12 @@ import { generateObject } from 'ai';
 import { z } from 'zod';
 import client from "@/lib/mongodb";
 
-const TAGS = ["Nábytok","Deti","Chovateľské potreby","Záhrada","Textil","Knihy, CD, DVD a pod."]
-
 const model = openai('gpt-4o-2024-08-06');
 
 const schema = z.object({
     title: z.string(),
     description: z.string(),
-    tags: z.array(z.enum(TAGS)),
+    tags: z.array(z.enum(["Nábytok","Deti","Chovateľské potreby","Záhrada","Textil","Knihy, CD, DVD a pod."])),
 });
 
 async function addToDB(imageData:string,message:object){

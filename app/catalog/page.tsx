@@ -1,5 +1,4 @@
 import React from "react";
-import Image from "next/image";
 import Categories from "@/components/Categories";
 import Search from "@/components/Search";
 import ItemList from "@/components/ItemList";

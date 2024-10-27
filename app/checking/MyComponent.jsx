@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 const ExactMatchComponent = () => {
   const [currentImage, setCurrentImage] = useState(bikeImage1); // Initialize with the first image
   const [categories, setCategories] = useState(['Hračka', 'Šport']); 
-  const [categories2, setCategories2] = useState(['Nabytok', 'Stolicka']); 
+  //const [categories2, setCategories2] = useState(['Nabytok', 'Stolicka']); 
   const [newCategory, setNewCategory] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false); // Show/hide suggestions
 
