@@ -92,35 +92,43 @@ export default function Camera({ onFinishedProcessing }: Props) {
             videoConstraints={videoConstraints}
             className="rounded-xl border-4 border-white shadow-md mb-4 w-full aspect-square"
           />
-          {!isProcessing && <button
-            onClick={capture}
-            disabled={isProcessing}
-            className={`flex flex-row items-center gap-1 mb-2 rounded-xl bg-white hover:bg-yellow-600 font-bold py-2 px-4 shadow-md transition duration-300`}
-          >
-            <MdOutlinePhotoCamera className="text-xl" />
-            Odfotiť
-          </button>}
-          {isProcessing && (<div className="flex flex-row gap-2 text-sm font-bold text-black w-full">
-            <input
-              type="text"
-              placeholder="Kód"
-              className="flex-grow w-2 border border-gray-300 rounded-md p-2 placeholder-gray-600"
-            />
+          {!isProcessing && (
             <button
-              className="bg-blue-600 text-white py-2 p-3 rounded-lg shadow-lg flex flex-row gap-2 items-center justify-center"
-              onClick={() => setIsProcessing(false)}
+              onClick={capture}
+              disabled={isProcessing}
+              className={`flex flex-row items-center gap-1 mb-2 rounded-xl bg-white hover:bg-yellow-600 font-bold py-2 px-4 shadow-md transition duration-300`}
             >
-              Opakovať
-              <FaRepeat className="text-base" />
+              <MdOutlinePhotoCamera className="text-xl" />
+              Odfotiť
             </button>
-            <button
-              className="bg-green-600 text-white py-2 pr-3 pl-4 rounded-lg shadow-lg flex flex-row gap-2 items-center justify-center"
-              onClick={() => onFinishedProcessing(id)}
-            >
-              Potvrdiť
-              <IoSend className="text-base" />
-            </button>
-          </div>)}
+          )}
+          {isProcessing && (
+            <div className="flex flex-row gap-2 text-sm font-bold text-black w-full">
+              <input
+                type="text"
+                placeholder="Kód"
+                className="flex-grow w-2 border border-gray-300 rounded-md p-2 placeholder-gray-600"
+              />
+              <button
+                className="bg-blue-600 text-white py-2 p-3 rounded-lg shadow-lg flex flex-row gap-2 items-center justify-center"
+                onClick={() => setIsProcessing(false)}
+              >
+                Opakovať
+                <FaRepeat className="text-base" />
+              </button>
+              <button
+                className="bg-green-600 text-white py-2 pr-3 pl-4 rounded-lg shadow-lg flex flex-row gap-2 items-center justify-center"
+                onClick={() => {
+                  if (id != "") {
+                    onFinishedProcessing(id);
+                  }
+                }}
+              >
+                Potvrdiť
+                <IoSend className="text-base" />
+              </button>
+            </div>
+          )}
         </>
       ) : (
         <p className="text-center text-lg text-red-600">
