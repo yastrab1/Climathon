@@ -29,7 +29,7 @@ export default function Home() {
     <div className="p-4 flex flex-col gap-4">
       <div className="w-full bg-white shadow-lg rounded-lg overflow-hidden relative mx-auto text-black">
         <div className="p-4 flex flex-col gap-4">
-          <div className="overflow-hidden justify-center items-center rounded-md max-h-[40rem] aspect-square text-red-950">
+          <div className="overflow-hidden justify-center items-center rounded-md max-w-[40rem] max-h-[40rem] aspect-square text-red-950">
             <img
               src={components && components.components[2].props.data}
               alt="item"
@@ -37,12 +37,11 @@ export default function Home() {
             />
           </div>
 
-          {/* Description Input */}
           <div className="mb-2">
             <textarea
               placeholder="Popis..."
               className="w-full border border-gray-300 rounded-md p-2 h-28"
-              defaultValue={components && components.components[1].props.data}
+              defaultValue={components && components.tags}
             ></textarea>
           </div>
         </div>

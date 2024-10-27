@@ -9,7 +9,7 @@ const model = openai('gpt-4o-2024-08-06');
 const schema = z.object({
     title: z.string(),
     description: z.string(),
-    tags: z.array(z.enum(["Nábytok","Deti","Chovateľské potreby","Záhrada","Textil","Knihy, CD, DVD a pod."])),
+    tags: z.array(z.enum(["Nábytok","Deti","Chovateľské potreby","Záhrada","Textil","Knihy, CD, DVD a pod.", "Porcelán", "Malé", "Šálka"])),
 });
 
 async function addToDB(imageData:string,message:object){
@@ -49,7 +49,6 @@ export async function POST(req: NextRequest) {
             ],
         });
         await addToDB(data, object)
-        console.log(object)
         return NextResponse.json({ message: object }, { status: 200 });
     } catch (error) {
         console.log(error);
