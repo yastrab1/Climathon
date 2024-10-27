@@ -1,80 +1,62 @@
-'use client'
-import React, {useEffect} from "react";
-import {useParams, useRouter} from "next/navigation";
+"use client";
+import React, { useEffect } from "react";
+import { useParams } from "next/navigation";
 import loadFormWithUUID from "@/app/problemy/[id]/getFormFromDB";
 
-
-export interface Form{
-  "dateCreated":string,
-  "tags":string[],
-  "components": { props: { data:string } }[],
-  "uuid":string,
+export interface Form {
+  dateCreated: string;
+  tags: string[];
+  components: { props: { data: string } }[];
+  uuid: string;
 }
 
 export default function Home() {
   const params = useParams();
   const id = params.id as string;
 
-  const router = useRouter()
+  const [components, setComponents] = React.useState<Form>();
 
-  const [components,setComponents] = React.useState<Form>();
-
-  useEffect(()=>{
-    loadFormWithUUID(id).then((val)=>{
-      if(val === null) {throw new Error()}
-      setComponents(val)
-    })
-
-  },[id])
+  useEffect(() => {
+    loadFormWithUUID(id).then((val) => {
+      if (val === null) {
+        throw new Error();
+      }
+      setComponents(val);
+    });
+  }, [id]);
 
   return (
-    <div className=" bg-white shadow-lg rounded-lg overflow-hidden relative mx-auto mt-2 text-black">
-      <h1 className={"font-extrabold text-4xl text-center"}>Nahlásenie problému v Prešove</h1>
-      {/* Content */}
-      <div className="p-4">
-        {/* Scalable Image Upload Section */}
-        <div className="flex flex-col border border-gray-300 justify-center items-center rounded-md mb-4 h-48 md:h-64 lg:h-72 text-red-950">
-          <img src={components && components.components[2].props.data} alt={"component"} className={"h-[100%]"}/>
-        </div>
+    <div className="p-4 flex flex-col gap-4">
+      <div className="w-full bg-white shadow-lg rounded-lg overflow-hidden relative mx-auto text-black">
+        <div className="p-4 flex flex-col gap-4">
+          <div className="overflow-hidden justify-center items-center rounded-md max-h-[40rem] aspect-square text-red-950">
+            <img
+              src={components && components.components[2].props.data}
+              alt="item"
+              className="w-full aspect-square"
+            />
+          </div>
 
-        {/* Name Input */}
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Názov..."
-            className="w-full border border-gray-300 rounded-md p-2"
-            defaultValue={components && components.components[0].props.data}
-          />
-        </div>
-
-        {/* Description Input */}
-        <div className="mb-2">
-          <textarea
-            placeholder="Popis..."
-            className="w-full border border-gray-300 rounded-md p-2 h-28"
-            defaultValue={components && components.components[1].props.data}
-          ></textarea>
-        </div>
-
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Názov..."
-            className="w-full border border-gray-300 rounded-md p-2"
-            defaultValue={components && components.tags}
-          />
+          {/* Description Input */}
+          <div className="mb-2">
+            <textarea
+              placeholder="Popis..."
+              className="w-full border border-gray-300 rounded-md p-2 h-28"
+              defaultValue={components && components.components[1].props.data}
+            ></textarea>
+          </div>
         </div>
       </div>
-
-      {/* Submit Button at Bottom Right */}
-      <div className="absolute bottom-10 right-4">
-        <button className="bg-red-600 text-white px-6 py-3 rounded-lg shadow-lg" onClick={()=> {
-          router.push('/');
-        }}>
-          Odoslať
-        </button>
-      </div>
-
+      <ul className="bg-white rounded-xl p-4 font-bold text-base flex flex-col gap-2">
+        <li>
+          1. Dôjdite na pobočku KOLA a prídte s objektom ktorý chceš odovzdať k
+          pokladni
+        </li>
+        <li>2. Následne stlačte odfotiť a odfoťte fotku objektu</li>
+        <li>3. Na pokladni je kód ktorý zadáte po odfotení</li>
+        <li>4. Pokladňa vytlačí QR kód, ktorý nalepíte na objekt</li>
+        <li>5. Objekt položte na miesto vedľa pokľadne </li>
+      </ul>
     </div>
   );
 }
