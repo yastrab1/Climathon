@@ -7,7 +7,7 @@ import PostToDB from "./postToDb";
 import { MdOutlinePhotoCamera } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 import { FaRepeat } from "react-icons/fa6";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface FormFill {
   title: string;
