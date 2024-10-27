@@ -38,11 +38,12 @@ export default function Home() {
           </div>
 
           <div className="mb-2">
-            <textarea
+            <p className="text-sm font-bold">{components?.tags.map((item, index) => (index != 0) ? (" | " + item) : item)}</p>
+            {/*<textarea
               placeholder="Popis..."
               className="w-full border border-gray-300 rounded-md p-2 h-28"
               defaultValue={components && components.tags}
-            ></textarea>
+            ></textarea>*/}
           </div>
         </div>
       </div>
