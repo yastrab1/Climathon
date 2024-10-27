@@ -103,17 +103,18 @@ export default function Camera({ onFinishedProcessing }: Props) {
           {isProcessing && (<div className="flex flex-row gap-2 text-sm font-bold text-black w-full">
             <input
               type="text"
-              placeholder="Kód na pokladni..."
-              className="flex-grow border border-gray-300 bg- rounded-md p-2 placeholder-gray-600"
+              placeholder="Kód"
+              className="flex-grow w-2 border border-gray-300 rounded-md p-2 placeholder-gray-600"
             />
             <button
-              className="bg-blue-600 text-white py-2 p-3 rounded-lg shadow-lg flex flex-row gap-1 items-center justify-center"
+              className="bg-blue-600 text-white py-2 p-3 rounded-lg shadow-lg flex flex-row gap-2 items-center justify-center"
               onClick={() => setIsProcessing(false)}
             >
+              Opakovať
               <FaRepeat className="text-base" />
             </button>
             <button
-              className="bg-green-600 text-white py-2 pr-3 pl-4 rounded-lg shadow-lg flex flex-row gap-1 items-center justify-center"
+              className="bg-green-600 text-white py-2 pr-3 pl-4 rounded-lg shadow-lg flex flex-row gap-2 items-center justify-center"
               onClick={() => onFinishedProcessing(id)}
             >
               Potvrdiť
