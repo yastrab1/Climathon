@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "./components/header";
+import Header from "@/components/Header";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,9 +28,9 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      ><header>
-        <Header></Header>
-        </header>
+      >
+        <Header/>
+        <div className="h-16"></div>
         {children}
         <footer className="w-full mt-8 p-4 bg-primaryYellow text-white text-center font-semibold">
         © 2024 KOLO. All Rights Reserved.
