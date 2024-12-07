@@ -5,13 +5,13 @@ export default function Page(){
 
 
     const handleGet = async() => {
-        const response = await fetch("api/getTags", {
-            method: "GET",
-            headers: {'Content-Type': 'application/json'}, 
-        }
-        )
-        const data = await response.json()
-        console.log(data)
+        // const response = await fetch("api/getTags", {
+        //     method: "GET",
+        //     headers: {'Content-Type': 'application/json'}, 
+        // }
+        // )
+        // const data = await response.json()
+        // console.log(data)
     }
 
     const handlePost = async() => {

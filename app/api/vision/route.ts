@@ -1,19 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { openai } from '@ai-sdk/openai';
 import { generateObject } from 'ai';
-import { string, z } from 'zod';
+import {z } from 'zod';
 import client from "@/lib/mongodb";
-import { gettags } from '../getTags/route';
 
 const model = openai('gpt-4o-2024-08-06');
 
-const data = await gettags()
-console.log(typeof(data))
+const data: string[] = await gettags()
+// console.log(typeof(data))
 
 const schema = z.object({
     title: z.string(),
     description: z.string(),
-    //@ts-ignore
+    //@ts-expect-error fkdk
     tags: z.array(z.enum(data)),
 });
 
@@ -31,6 +30,20 @@ async function addToDB(imageData:string,message:object){
     }
 }
 
+async function gettags(){
+    await client.connect()
+    const db = client.db('TAGS').collection('Tags')
+    const data = await db.find({}).toArray()
+    // console.log(data)
+    const tags: string[] = ['a', 'b']
+    for (let i = 0, len = data.length; i < len; i++) {
+        tags.push(data[i].tag)
+
+    }
+    // console.log(tags)
+    return tags
+
+}
 
 export async function POST(req: NextRequest) {
     try {
